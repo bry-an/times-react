@@ -4,8 +4,8 @@ module.exports = {
     findAll: (req, res) => {
         db.Article
             .find(req.query)
-            .then(response => res.json(response)
-            .catch(err => res.status(422).json(err)))
+            .then(response => res.json(response))
+            .catch(err => res.status(422).json(err))
     }, 
     create: (req, res) => {
         db.Article
