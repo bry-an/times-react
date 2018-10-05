@@ -17,4 +17,4 @@ mongoose.connect(
     process.env.MONGODB_URI || 'mongodb://localhost/timesreact'
 )
 
-app.listen(port, () => console.log('listening on ' + PORT))
+app.listen(PORT, () => console.log('listening on ' + PORT))
