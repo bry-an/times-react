@@ -15,6 +15,4 @@ const articleSchema = new Schema({
 
 const Article = mongoose.model("Article", articleSchema)
 
-export default {
-    Article
-}
+module.exports = Article
