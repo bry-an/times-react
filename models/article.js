@@ -10,7 +10,11 @@ const articleSchema = new Schema({
   },
   url: {
     type: String
+  },
+  subtitle: {
+    type: String
   }
+
 });
 
 const Article = mongoose.model("Article", articleSchema)

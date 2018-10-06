@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header/Header'
-import SearchForm from './components/SearchForm/SearchForm'
+import ArticleSearch from './components/ArticleSearch/ArticleSearch'
 
 class App extends Component {
   render() {
@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
       <Header />
       <div className='container'>
-      <SearchForm />
+      <ArticleSearch />
       </div>
       </div>
     );
