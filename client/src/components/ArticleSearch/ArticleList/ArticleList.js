@@ -5,9 +5,8 @@ import ArticleListItem from "./ArticleListItem/ArticleListItem";
 const ArticleList = props =>  (
   <div className="article-list">
     <div className="article-list-header">
-      <h3>Results</h3>
+      <h2>Results</h2>
     </div>
-    <div className="article-list-results"></div>
     <table className='u-full-width'>
     <thead>
         <tr>
@@ -21,13 +20,15 @@ const ArticleList = props =>  (
         {
             (props.articles.length
         ? props.articles.map(article=> <ArticleListItem 
-            key= {article.web_url}
-            url= {article.web_url}
-            date={article.pub_date} 
-            title={article.headline.main} 
-            subtitle={article.snippet} 
-            saveArticle={props.saveArticle}/>)
-        : null )}
+            key= {article.url}
+            url= {article.url}
+            date={article.date} 
+            title={article.title} 
+            subtitle={article.subtitle} 
+            id={article.id}
+            saved={article.saved}
+            buttonMethod={props.saveArticle}/>)
+        : <tr><td></td><td>No search term entered</td></tr> )}
     </tbody>
     
     </table>

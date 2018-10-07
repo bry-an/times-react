@@ -13,6 +13,9 @@ const articleSchema = new Schema({
   },
   subtitle: {
     type: String
+  }, 
+  saved: {
+    type: Boolean
   }
 
 });
