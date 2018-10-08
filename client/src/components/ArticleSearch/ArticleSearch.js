@@ -15,10 +15,15 @@ class ArticleSearch extends Component {
     saved: []
   };
 
+
+  componentDidMount () {
+    this.getSavedArticles()
+  }
+
   saveArticle = article => {
     axios.post('/api/articles', article)
       .then(res => {
-        if (res.data.upserted) {
+        // if (res.data.upserted) {
         const savedArticleUrl = article.url
         const newArticles = this.state.articles
         newArticles.forEach(article => {
@@ -27,15 +32,26 @@ class ArticleSearch extends Component {
         })
 
         this.setState({
-          articles: newArticles
+          articles: newArticles, 
+          saved: [...this.state.saved, article.url]
         })
-      }
+      // }
     })
+  }
+
+  getSavedArticles = () => {
+    axios 
+      .get('/api/articles')
+      .then(res => res.data)
+      .then(res => 
+        this.setState({
+          saved: res.map(article => article.url)
+        })
+      )
   }
 
   articleQuery = query => {
     api.articleQuery(query).then(res => {
-      console.log(res)
       const articleArr = res.data.response.docs
       const articles = articleArr.map(article => ({
         title: article.headline.main,
@@ -43,7 +59,9 @@ class ArticleSearch extends Component {
         url: article.web_url,
         date: article.pub_date,
         id: article._id,
-        saved: false
+        saved: this.state.saved.includes(article.web_url)
+          ? true 
+          : false
       }));
       this.setState({
         articles
@@ -52,22 +70,23 @@ class ArticleSearch extends Component {
   };
 
   articleQueryByDate = (query, beginningDate, endingDate) => {
-    api.articleQueryByDate(query, beginningDate, endingDate).then(res => {
-      const articleArr = res.data.response.docs;
-      console.log(articleArr)
-      const articles = articleArr.map(article => ({
-        title: article.headline.main,
-        subtitle: article.snippet,
-        url: article.web_url,
-        date: article.pub_date,
-        id: article._id,
-        saved: false
-      }));
-      console.log(articles)
-      this.setState({
-        articles
-      });
-    });
+    api.articleQueryByDate(query, beginningDate, endingDate)
+      .then(res => {
+        const articleArr = res.data.response.docs;
+        const articles = articleArr.map(article => ({
+          title: article.headline.main,
+          subtitle: article.snippet,
+          url: article.web_url,
+          date: article.pub_date,
+          id: article._id,
+          saved: this.state.saved.includes(article.web_url)
+            ? true
+            : false
+        }));
+        this.setState({
+          articles
+        });
+      })
   };
 
   inputHandler = event => {
@@ -90,11 +109,6 @@ class ArticleSearch extends Component {
       const endingDate = this.state.endingDate;
       const formattedBeginningDate = moment(beginningDate).format("YYYYMMDD");
       const formattedEndingDate = moment(endingDate).format("YYYYMMDD");
-      console.log(
-        "formatted dates",
-        formattedBeginningDate,
-        formattedEndingDate
-      );
       this.articleQueryByDate(
         this.state.searchQuery,
         formattedBeginningDate,
