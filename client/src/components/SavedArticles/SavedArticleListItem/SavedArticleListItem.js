@@ -7,7 +7,7 @@ import SavedArticleButton from '../SavedArticleButton'
 const SavedArticleListItem = props => (
     <Fragment>
         <tr>
-        <td>{moment(props.date).format('YYYY-MM-DD')}</td>
+        <td className='date-cell'>{moment(props.date).format('YYYY-MM-DD')}</td>
         <td>{<a href={props.url}>{props.title}</a>}</td>
         <td>{props.subtitle}</td>
         <SavedArticleButton 
