@@ -4,7 +4,7 @@ const routes = require('./routes')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || 3001
 const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
+const jwt = require('./helpers/jwt')
 const cors = require('cors')
 
 app.use(express.urlencoded({ extended: true }))
