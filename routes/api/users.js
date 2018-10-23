@@ -1,5 +1,4 @@
-
-const router = require('express').router()
+const router = require('express').Router()
 const usersController = require('../../controllers/usersController')
 
 router.route('/authenticate')
@@ -10,3 +9,5 @@ router.route('/register')
 
 router.route('/delete')
     .delete()
+
+module.exports = router

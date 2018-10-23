@@ -8,7 +8,7 @@ module.exports = {
                 ? res.json(user)
                 : res.status(400)
                     .json({
-                        message: 'Username or password is incoorect'
+                        message: 'Username or password is incorrect'
                     }))
             .catch(err => next(err))
     }, 

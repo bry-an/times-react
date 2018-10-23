@@ -3,7 +3,6 @@ const config = require('../config.json')
 const userService = require('../users/userService')
 
 
-module.exports = jwt;
 
 jwt = () => {
     const secret = config.secret
@@ -13,8 +12,8 @@ jwt = () => {
     })
     .unless({
         path: [
-            'users/authenticate', 
-            'users/register',
+            '/api/users/authenticate', 
+            '/api/users/register',
             '/'
         ]
     })
@@ -30,3 +29,5 @@ isRevoked = async (req, payload, done) => {
 
     done()
 }
+
+module.exports = jwt;

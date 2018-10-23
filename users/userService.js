@@ -4,11 +4,6 @@ const bcrypt = require('bcrypt')
 const db = require('../models')
 const User = db.User
 
-module.exports = {
-    authenticate, 
-    create, 
-    delete: _delete
-}
 
 authenticate = async ({ username, password }) => {
     const user = await User.findOne({ username })
@@ -31,13 +26,24 @@ create = async (userParam) => {
     //hash pw
 
     if (userParam.password) {
-        user.hash = bcrypt.hash(userParam.password, 10)
+        bcrypt.hash(userParam.password, 10)
+            .then(hash => user.hash = hash)
+            .then(_=> user.save())
     }
 
     //save user
-    await user.save()
+}
+
+getById = async (id) => {
+    return await User.findById(id).select('-hash')
 }
 
 _delete = async (id) => {
     await User.findByIdAndDelete(id)
+}
+
+module.exports = {
+    authenticate, 
+    create, 
+    delete: _delete
 }
