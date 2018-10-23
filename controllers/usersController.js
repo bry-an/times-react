@@ -25,6 +25,13 @@ module.exports = {
                 message: 'User deleted'
             }))
             .catch(err => next(err))
+    }, 
+    getCurrent: (req, res, next) => {
+        userService.getById(req.user.sub)
+            .then(user => user 
+                ? res.json(user)
+                : res.sendStatus(404))
+            .catch(err => next(err))
     }
 
 }

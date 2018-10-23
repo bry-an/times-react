@@ -14,7 +14,7 @@ jwt = () => {
         path: [
             '/api/users/authenticate', 
             '/api/users/register',
-            '/'
+            '/api/users/getcurrent'
         ]
     })
 }

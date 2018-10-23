@@ -8,6 +8,9 @@ router.route('/register')
     .post(usersController.register)
 
 router.route('/delete')
-    .delete()
+    .delete(usersController.delete)
+
+router.route('/getcurrent')
+    .get(usersController.getCurrent)
 
 module.exports = router
