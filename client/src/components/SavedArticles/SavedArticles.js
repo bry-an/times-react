@@ -27,7 +27,7 @@ class SavedArticles extends Component {
   deleteArticle = article => {
     const id = article.id;
     console.log(id);
-    axios.delete("/api/articles/" + id).then(_ => this.getSavedArticles());
+    axios.delete("/api/articles/" + id).then(() => this.getSavedArticles());
   };
 
   render() {
